@@ -21,13 +21,13 @@ public class MainActivity extends ActionBarActivity {
 	private UsuarioController usuarioController;
 	private AlertDialog.Builder alerta;
 
-	// métodos getters e setters
+	// métodos getters e setters.
 	// ...
 
-	// Declaração do construtor
+	// Declaração do construtor.
 	// ...
 
-	// Declaração dos métodos dessa classe.
+	// Métodos.
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -57,9 +57,9 @@ public class MainActivity extends ActionBarActivity {
 		if (usuarioController.findAll().isEmpty()
 				|| usuarioController.findAll() == null) {
 			Usuario usuario = new Usuario();
-			usuario.setNome("Jorenilson");
-			usuario.setIdade("29");
-			usuario.setUsuario("jlopes");
+			usuario.setNome("Administrador");
+			usuario.setIdade("30");
+			usuario.setUsuario("admin");
 			usuario.setEmail("jorenilsonlopes@gmail.com");
 			usuario.setSenha("senha");
 			usuarioController.inserir(usuario);
@@ -94,7 +94,9 @@ public class MainActivity extends ActionBarActivity {
 			} else {
 				boolean isValid = usuarioController.validaLogin(usuario, senha);
 				if (isValid) {
-					exibeDialogo("Usuário e senha validados com sucesso.");
+					// Login validado com sucesso, carrega a tela home da aplicação.
+					telaHome(view);
+					this.finish();
 				} else {
 					exibeDialogo("Verifique usuário e senha.");
 				}
@@ -107,10 +109,18 @@ public class MainActivity extends ActionBarActivity {
 	}
 
 	/*
-	 * Este méetodo irá carregar a tela de cadastro de novos usuários.
+	 * Este método irá carregar a tela de cadastro de novos usuários.
 	 */
 	public void cadastrarNovo(View view) {
 		Intent intent = new Intent(this, Cadastro.class);
+		startActivity(intent);
+	}
+	
+	/*
+	 * Este méetodo irá carregar a tela Home, caso o login seja validade com sucesso.
+	 */
+	public void telaHome(View view){
+		Intent intent = new Intent(this, Home.class);
 		startActivity(intent);
 	}
 }

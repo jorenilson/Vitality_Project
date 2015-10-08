@@ -40,8 +40,8 @@
         android:id="@+id/edtIdade"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Idade" >
-    </EditText>
+        android:hint="Idade"
+        android:numeric="integer" />
 
     <EditText
         android:id="@+id/edtSenha"
