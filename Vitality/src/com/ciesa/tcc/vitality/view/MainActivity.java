@@ -42,7 +42,7 @@ public class MainActivity extends ActionBarActivity {
 		try {
 			testaInicializacao();
 		} catch (Exception e) {
-			exibeDialogo("Erro inicializando o banco de dados");
+			exibeDialogo("Erro inicializando o banco de dados. Detalhe: " + e);
 			e.printStackTrace();
 		}
 
@@ -80,10 +80,10 @@ public class MainActivity extends ActionBarActivity {
 
 	/*
 	 * Este método irá primeiramente verifica se os campos usuário e senha foram
-	 * devidamente preenchidos de cordo com o item FP04. Em seguida o sistema
-	 * irá realizar a validação dos dados informados comparando com o dado
-	 * retornado do banco de dados de acordo com o item A.1.1 do documento de
-	 * caso de uso.
+	 * devidamente preenchidos de cordo com o item FP04 da UC[001 - Realizar
+	 * login]. Em seguida o sistema irá realizar a validação dos dados
+	 * informados comparando com o dado retornado do banco de dados de acordo
+	 * com o item A.1.1 do documento de caso de uso.
 	 */
 	public void validar(View view) {
 		String usuario = edtUsuario.getText().toString();
@@ -94,9 +94,11 @@ public class MainActivity extends ActionBarActivity {
 			} else {
 				boolean isValid = usuarioController.validaLogin(usuario, senha);
 				if (isValid) {
-					// Login validado com sucesso, carrega a tela home da aplicação.
-					telaHome(view);
-					this.finish();
+					// Login validado com sucesso, carrega a tela home da
+					// aplicação.
+					//telaHome(view);
+					// this.finish();
+					exibeDialogo("Validado com sucesso.");
 				} else {
 					exibeDialogo("Verifique usuário e senha.");
 				}
@@ -115,11 +117,12 @@ public class MainActivity extends ActionBarActivity {
 		Intent intent = new Intent(this, Cadastro.class);
 		startActivity(intent);
 	}
-	
+
 	/*
-	 * Este méetodo irá carregar a tela Home, caso o login seja validade com sucesso.
+	 * Este méetodo irá carregar a tela Home, caso o login seja validade com
+	 * sucesso.
 	 */
-	public void telaHome(View view){
+	public void telaHome(View view) {
 		Intent intent = new Intent(this, Home.class);
 		startActivity(intent);
 	}

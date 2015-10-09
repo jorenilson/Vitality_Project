@@ -3,7 +3,9 @@ package com.ciesa.tcc.vitality.view;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -29,10 +31,15 @@ public class Cadastro extends Activity {
 	// getters e setters
 	// ...
 
+	// construtor
+	// ...
+
 	// Métodos
 	public void onCreate(Bundle savedInstanceState) {
+		// habilito o botão boltar
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.novo);
 
@@ -44,13 +51,6 @@ public class Cadastro extends Activity {
 		edEmail = (EditText) findViewById(R.id.edtEmail);
 		edIdade = (EditText) findViewById(R.id.edtIdade);
 		edSenha = (EditText) findViewById(R.id.edtSenha);
-
-		try {
-
-		} catch (Exception e) {
-			exibeDialogo("Erro inicializando o banco de dados");
-			e.printStackTrace();
-		}
 	}
 
 	/*
@@ -58,10 +58,30 @@ public class Cadastro extends Activity {
 	 * personalizada de acordo com a mensagem passada por parâmetro para o
 	 * método exibeDialogo.
 	 */
-	public void exibeDialogo(String mensagem) {
+	public void exibeDialogo(String titulo, String mensagem) {
 		alerta = new AlertDialog.Builder(context);
-		alerta.setPositiveButton("OK", null);
+		alerta.setTitle(titulo);
 		alerta.setMessage(mensagem);
+		alerta.setPositiveButton("OK", null);
+		alerta.create().show();
+	}
+
+	/*
+	 * Exibe na tela uma caixa de diálogo exibindo uma confirmação de que o
+	 * cadastro foi realizado com sucesso.
+	 */
+	public void exibirDialogoConfirmacaoCadastro(View view) {
+		alerta = new AlertDialog.Builder(context);
+		alerta.setTitle("Seja bem vindo!");
+		alerta.setMessage("Seu cadastro foi realizado com sucesso.");
+		alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				exibirTelaLogin();
+			}
+		});
 		alerta.create().show();
 	}
 
@@ -89,25 +109,42 @@ public class Cadastro extends Activity {
 	 * de uma edição ou uma inclusão.
 	 */
 	public void inserirCampos(View view) throws Exception {
-		Usuario usuario = new Usuario();
-		boolean usuarioExiste;
+		try {
 
-		usuario.setNome(edNome.getText().toString());
-		usuario.setUsuario(edUsuario.getText().toString());
-		usuario.setIdade(edUsuario.getText().toString());
-		usuario.setEmail(edEmail.getText().toString());
-		usuario.setSenha(edSenha.getText().toString());
-		usuarioExiste = usuarioController.consultaUsuario(usuario.getUsuario());
+			Usuario usuario = new Usuario();
+			boolean usuarioExiste;
+			String varNome = edNome.getText().toString();
+			String varUsuario = edUsuario.getText().toString();
+			String varIdade = edIdade.getText().toString();
+			String varEmail = edEmail.getText().toString();
+			String varSenha = edSenha.getText().toString();
 
-		if (usuarioExiste) {
-			exibeDialogo("O cadastro não pôde ser realizado. Usuário já consta no banco de dados.");
-		} else {
-			usuarioController.inserir(usuario);
-			exibeDialogo("Seu cadastro foi realizado com sucesso.");
-			Intent intent = new Intent(this,MainActivity.class);
-			startActivity(intent);
-			
+			usuario.setNome(varNome);
+			usuario.setUsuario(varUsuario);
+			usuario.setIdade(varIdade);
+			usuario.setEmail(varEmail);
+			usuario.setSenha(varSenha);
+			usuarioExiste = usuarioController.consultaUsuario(usuario.getUsuario());
+
+			if (varNome.isEmpty() || varUsuario.isEmpty() || varIdade.isEmpty() || varEmail.isEmpty() || varSenha.isEmpty()){
+				exibeDialogo("Opa!", "O preenchimento dos campos é obrigatorio; Dado(s) inválido(s).");
+			}else if (usuarioExiste) {
+				exibeDialogo(
+						"Quase lá...",
+						"O cadastro não pôde ser realizado. Usuário informado já consta no banco de dados.");
+			} else {
+				usuarioController.inserir(usuario);
+				exibirDialogoConfirmacaoCadastro(view);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
 		}
+	}
+
+	public void exibirTelaLogin() {
+		Intent intent = new Intent(this, MainActivity.class);
+		startActivity(intent);
 	}
 
 }
