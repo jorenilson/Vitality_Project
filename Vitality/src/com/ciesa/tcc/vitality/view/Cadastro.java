@@ -43,8 +43,7 @@ public class Cadastro extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.novo);
 
-		context = this;
-		usuarioController = usuarioController.getInstance(context);
+		usuarioController = usuarioController.getInstance(this);
 
 		edNome = (EditText) findViewById(R.id.edtNome);
 		edUsuario = (EditText) findViewById(R.id.edtUsuario);

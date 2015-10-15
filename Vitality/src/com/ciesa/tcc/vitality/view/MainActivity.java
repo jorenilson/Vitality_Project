@@ -5,8 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.ciesa.tcc.vitality.R;
 import com.ciesa.tcc.vitality.controller.UsuarioController;
@@ -72,10 +74,12 @@ public class MainActivity extends ActionBarActivity {
 	 * método exibeDialogo.
 	 */
 	public void exibeDialogo(String mensagem) {
-		alerta = new AlertDialog.Builder(context);
-		alerta.setPositiveButton("OK", null);
-		alerta.setMessage(mensagem);
-		alerta.create().show();
+		Context contexto = getApplicationContext();
+		int duracao = Toast.LENGTH_SHORT;
+		
+		Toast toast = Toast.makeText(contexto, mensagem, duracao);
+		toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
+		toast.show();
 	}
 
 	/*
@@ -94,17 +98,13 @@ public class MainActivity extends ActionBarActivity {
 			} else {
 				boolean isValid = usuarioController.validaLogin(usuario, senha);
 				if (isValid) {
-					// Login validado com sucesso, carrega a tela home da
-					// aplicação.
-					//telaHome(view);
-					// this.finish();
-					exibeDialogo("Validado com sucesso.");
+					exibirTelaHome(view);
 				} else {
 					exibeDialogo("Verifique usuário e senha.");
 				}
 			}
 		} catch (Exception e) {
-			exibeDialogo("Erro validando usuário e senha.");
+			exibeDialogo("Erro Interno! Validando usuário e senha.");
 			e.printStackTrace();
 			// TODO: handle exception
 		}
@@ -122,7 +122,7 @@ public class MainActivity extends ActionBarActivity {
 	 * Este méetodo irá carregar a tela Home, caso o login seja validade com
 	 * sucesso.
 	 */
-	public void telaHome(View view) {
+	public void exibirTelaHome(View view) { 
 		Intent intent = new Intent(this, Home.class);
 		startActivity(intent);
 	}
