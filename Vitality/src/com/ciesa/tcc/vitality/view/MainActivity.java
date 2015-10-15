@@ -44,7 +44,7 @@ public class MainActivity extends ActionBarActivity {
 		try {
 			testaInicializacao();
 		} catch (Exception e) {
-			exibeDialogo("Erro inicializando o banco de dados. Detalhe: " + e);
+			exibeDialogo("Erro inicializando o banco de dados. Detalhe: ");
 			e.printStackTrace();
 		}
 
