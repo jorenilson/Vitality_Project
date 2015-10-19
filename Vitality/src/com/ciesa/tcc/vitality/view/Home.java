@@ -1,21 +1,25 @@
 package com.ciesa.tcc.vitality.view;
 
 import com.ciesa.tcc.vitality.R;
+import com.ciesa.tcc.vitality.fragments.CalcularImcFragment;
+import com.ciesa.tcc.vitality.fragments.PrincipalFragment;
 
-import android.content.Context;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class Home extends ActionBarActivity {
 
@@ -37,14 +41,12 @@ public class Home extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home);
-		initView();
-		onConfigListener();
-		onConfigListItem();
-		onConfigActionBar();
+		initView(); // Inicializa os componentes da tela
+
+		if (savedInstanceState == null) {
+			criaFragment(new PrincipalFragment());
+		}
 	}
-	
-	
-	
 
 	public void initView() {
 		vDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -52,122 +54,101 @@ public class Home extends ActionBarActivity {
 		actionBar = getSupportActionBar();
 
 		drawerToggle = new ActionBarDrawerToggle(this, // Contexto do activity
-														// atual.
 				vDrawerLayout, // Objeto DrawerLayout.
-				R.drawable.ic_drawer, // Ícone que irá aparecer no canto
-										// superior esquerdo da activity.
-				R.string.drawer_open, // Descrição "Abrir Drawer".
-				R.string.drawer_close // Descrição "Fechar Drawer".
+				R.drawable.ic_drawer, // Ícone que irá aparecer
+				R.string.drawer_open, // Descrição "Abrir Drawer"
+				R.string.drawer_close // Descrição "Fechar Drawer"
 		) {
 
-			/**
-			 * Chamado quando o drawer for atribuído em um completo estado de
-			 * fechado.
-			 */
+			// Chamado quando o drawer list for fechado.
 			@Override
 			public void onDrawerClosed(View drawerView) {
 				supportInvalidateOptionsMenu();
 			}
 
-			/**
-			 * Chamado quando o drawer tem atribuido em um completo estado de
-			 * aberto.
-			 */
+			// Chamado quando o drawer list for aberto.
 			@Override
 			public void onDrawerOpened(View drawerView) {
 				supportInvalidateOptionsMenu();
 			}
 		};
+
 		textOpcoes = getResources().getStringArray(R.array.itens_menu_array);
-		vDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,	GravityCompat.START);
+		drawerList.setAdapter(new ArrayAdapter<String>(this,
+				R.layout.drawer_list_item, textOpcoes));
+		drawerList.setOnItemClickListener(listener);
+
+		vDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
+				GravityCompat.START);
+
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setHomeButtonEnabled(true);
+
 	}
-	
-	private void onConfigListener(){
-		drawerList.setOnItemClickListener(new DrawerItemClickListener(this, vDrawerLayout, drawerList));
-	}
-	
-	private void onConfigListItem(){
-		drawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, textOpcoes));
-	}
-	
-	
-	
-	/* (non-Javadoc)
-	 * @see android.support.v7.app.ActionBarActivity#onConfigurationChanged(android.content.res.Configuration)
-	 */
+
+	// Escuta do ListView(DrawerList)
+	OnItemClickListener listener = new OnItemClickListener() {
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
+			selecionarItem(position);
+			vDrawerLayout.closeDrawer(Gravity.LEFT);
+		}
+	};
+
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
 		drawerToggle.onConfigurationChanged(newConfig);
 	}
 
-
-
-
-	/* (non-Javadoc)
-	 * @see android.app.Activity#onPostCreate(android.os.Bundle)
-	 */
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
 		drawerToggle.syncState();
 	}
 
-
-
-
-	/* (non-Javadoc)
-	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
-	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if (drawerToggle.onOptionsItemSelected(item)){
+		// Alterna o drawertoggle quando clicado no ícone da actionbar
+		if (drawerToggle.onOptionsItemSelected(item)) {
 			return true;
 		}
-			
+
 		return super.onOptionsItemSelected(item);
 	}
 
-
-
-
-	private void onConfigActionBar(){
-		actionBar.setDisplayHomeAsUpEnabled(true);
-		actionBar.setHomeButtonEnabled(true);
-	}
-	
-	
-	
-	
-	/**
-	 * Classe DrawerItemClickListener, que irá implementar o evento de click nos
-	 * itens do ListView.
-	 * 
-	 * @author Jorenilson Lopes
-	 *
+	/*
+	 * Este método é responsável por invocar a classe MeuFragmento, que irá
+	 * realizar a substituição de fragmento na tela.
 	 */
-	public class DrawerItemClickListener implements OnItemClickListener{
-		private Context context;
-		private DrawerLayout drawerLayout;
-		private ListView drawerList;
-		
-		public DrawerItemClickListener(Context context, DrawerLayout drawerLayout, ListView drawerList){
-			this.drawerLayout = drawerLayout;
-			this.drawerList = drawerList;
-			this.context = context;
+	public void selecionarItem(int posicao) {
+		switch (posicao) {
+		case 0:
+			PrincipalFragment principalFragment = new PrincipalFragment();
+			criaFragment(principalFragment);
+			setTitle(textOpcoes[posicao]);
+			break;
+		case 1:
+			CalcularImcFragment calcularImcFragment = new CalcularImcFragment();
+			criaFragment(calcularImcFragment);
+			setTitle(textOpcoes[posicao]);
+			break;
+		default:
+			setTitle("Vitality");
+			break;
 		}
 		
-		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position,
-				long id) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		private void selectItem(long posicao){
-			Toast.makeText(context, "Clicou na opção: "+ (posicao+1), Toast.LENGTH_LONG).show(); // Emite um alerta
-			drawerLayout.closeDrawer(drawerList); // Fecha o menu
-		}
-		
+		vDrawerLayout.closeDrawer(Gravity.LEFT);
+	}
+
+	/*
+	 * Este método ira criar os fragmentos de tela a serem exibidos no
+	 * content_frame do home.xml
+	 */
+	public void criaFragment(Fragment fragment) {
+		FragmentManager fragmentManager = getFragmentManager();
+		fragmentManager.beginTransaction()
+				.replace(R.id.content_frame, fragment).commit();
 	}
 }

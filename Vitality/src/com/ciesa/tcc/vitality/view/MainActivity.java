@@ -1,5 +1,6 @@
 package com.ciesa.tcc.vitality.view;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +15,7 @@ import com.ciesa.tcc.vitality.R;
 import com.ciesa.tcc.vitality.controller.UsuarioController;
 import com.ciesa.tcc.vitality.model.Usuario;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
 	// Declaração dos atributos da classe MainActivity.java
 	private EditText edtUsuario;
@@ -98,6 +99,7 @@ public class MainActivity extends ActionBarActivity {
 			} else {
 				boolean isValid = usuarioController.validaLogin(usuario, senha);
 				if (isValid) {
+					finish();
 					exibirTelaHome(view);
 				} else {
 					exibeDialogo("Verifique usuário e senha.");
