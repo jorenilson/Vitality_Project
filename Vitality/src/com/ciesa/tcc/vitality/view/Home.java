@@ -3,6 +3,7 @@ package com.ciesa.tcc.vitality.view;
 import com.ciesa.tcc.vitality.R;
 import com.ciesa.tcc.vitality.fragments.CalcularImcFragment;
 import com.ciesa.tcc.vitality.fragments.PrincipalFragment;
+import com.ciesa.tcc.vitality.fragments.RotinaDeExerciciosFragment;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -132,6 +133,11 @@ public class Home extends ActionBarActivity {
 		case 1:
 			CalcularImcFragment calcularImcFragment = new CalcularImcFragment();
 			criaFragment(calcularImcFragment);
+			setTitle(textOpcoes[posicao]);
+			break;
+		case 2:
+			RotinaDeExerciciosFragment rotinaDeExerciciosFragment = new RotinaDeExerciciosFragment();
+			criaFragment(rotinaDeExerciciosFragment);
 			setTitle(textOpcoes[posicao]);
 			break;
 		default:

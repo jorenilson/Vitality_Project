@@ -11,6 +11,11 @@
         <item>Rotina de Exercício</item>
         <item>Sair</item>
     </string-array>
+    <string-array name="lista_exercicios">
+        <item>Correr</item>
+        <item>Caminhar</item>
+        <item>Pedalar</item>
+    </string-array>
     <string name="drawer_open">Abrir navegação Drawer</string>
     <string name="drawer_close">Fecha navegaçao drawer</string>
     <string name="action_websearch">Web search</string>

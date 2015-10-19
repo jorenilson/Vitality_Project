@@ -14,7 +14,7 @@ public class CalcularImcFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View view = inflater.inflate(R.layout.calcular_imc, container, false);
+		View view = inflater.inflate(R.layout.fragmento_calcular_imc, container, false);
 		return view;
 	}
 
