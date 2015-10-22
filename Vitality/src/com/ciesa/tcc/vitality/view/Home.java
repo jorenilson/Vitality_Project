@@ -1,6 +1,7 @@
 package com.ciesa.tcc.vitality.view;
 
 import com.ciesa.tcc.vitality.R;
+import com.ciesa.tcc.vitality.fragments.AvaliacaoFisicaFragment;
 import com.ciesa.tcc.vitality.fragments.CalcularImcFragment;
 import com.ciesa.tcc.vitality.fragments.PrincipalFragment;
 import com.ciesa.tcc.vitality.fragments.RotinaDeExerciciosFragment;
@@ -138,6 +139,11 @@ public class Home extends ActionBarActivity {
 		case 2:
 			RotinaDeExerciciosFragment rotinaDeExerciciosFragment = new RotinaDeExerciciosFragment();
 			criaFragment(rotinaDeExerciciosFragment);
+			setTitle(textOpcoes[posicao]);
+			break;
+		case 3:
+			AvaliacaoFisicaFragment avaliaFisicaFragment = new AvaliacaoFisicaFragment();
+			criaFragment(avaliaFisicaFragment);
 			setTitle(textOpcoes[posicao]);
 			break;
 		default:

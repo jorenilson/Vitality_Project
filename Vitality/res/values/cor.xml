@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="branco">#FFFFFF</color>
+    <color name="amarelo">#FFFF00</color>
+    <color name="marrom">#993300</color>
+    <color name="azul1">#0000FF</color>
+    <color name="azul2">#66FFFF</color>
+    <color name="preto">#000000</color>
+
 </resources>

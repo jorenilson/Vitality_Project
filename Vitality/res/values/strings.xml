@@ -9,6 +9,7 @@
         <item>Vitality</item>
         <item>Calcular IMC</item>
         <item>Rotina de Exercício</item>
+        <item>Avaliaçao Física</item>
         <item>Sair</item>
     </string-array>
     <string-array name="lista_exercicios">
@@ -20,6 +21,11 @@
     <string name="drawer_close">Fecha navegaçao drawer</string>
     <string name="action_websearch">Web search</string>
     <string name="teste">teste</string>
+    <string-array name="lista_intensidade">
+        <item>Leve</item>
+        <item>Mediana</item>
+        <item>Intensa</item>
+    </string-array>
     
 
 </resources>
