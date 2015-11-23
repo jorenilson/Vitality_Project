@@ -1,17 +1,19 @@
 package com.ciesa.tcc.vitality.view;
 
 import com.ciesa.tcc.vitality.R;
-import com.ciesa.tcc.vitality.fragments.AvaliacaoFisicaFragment;
-import com.ciesa.tcc.vitality.fragments.CalcularImcFragment;
-import com.ciesa.tcc.vitality.fragments.PrincipalFragment;
-import com.ciesa.tcc.vitality.fragments.RotinaDeExerciciosFragment;
+import com.ciesa.tcc.vitality.fragments.FragmentTelaAvaliacaoFisica;
+import com.ciesa.tcc.vitality.fragments.FragmentTelaCalcularImc;
+import com.ciesa.tcc.vitality.fragments.FragmentTelaPrincipal;
+import com.ciesa.tcc.vitality.fragments.FragmentTelaRotinaDeExercicios;
 
-import android.app.Fragment;
+//import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
@@ -31,23 +33,25 @@ public class Home extends ActionBarActivity {
 	private String[] textOpcoes;
 	private ListView drawerList;
 	private android.support.v7.app.ActionBar actionBar;
+	
+	// Instância dos fragmentos de tela
+	private Fragment fragmentTelaPrincipal = new FragmentTelaPrincipal();
 
-	// métodos getters e setters
-	// ...
-
-	// construtor
-	// ...
 
 	// métodos
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.home);
+		setContentView(R.layout.telahome);
+		
+		adicionaFragment(fragmentTelaPrincipal);
+		
 		initView(); // Inicializa os componentes da tela
 
-		if (savedInstanceState == null) {
+		
+		/*if (savedInstanceState == null) {
 			criaFragment(new PrincipalFragment());
-		}
+		}*/
 	}
 
 	public void initView() {
@@ -127,23 +131,23 @@ public class Home extends ActionBarActivity {
 	public void selecionarItem(int posicao) {
 		switch (posicao) {
 		case 0:
-			PrincipalFragment principalFragment = new PrincipalFragment();
-			criaFragment(principalFragment);
+			FragmentTelaPrincipal principalFragment = new FragmentTelaPrincipal();
+			substituirFragment(principalFragment);
 			setTitle(textOpcoes[posicao]);
 			break;
 		case 1:
-			CalcularImcFragment calcularImcFragment = new CalcularImcFragment();
-			criaFragment(calcularImcFragment);
+			FragmentTelaCalcularImc calcularImcFragment = new FragmentTelaCalcularImc();
+			substituirFragment(calcularImcFragment);
 			setTitle(textOpcoes[posicao]);
 			break;
 		case 2:
-			RotinaDeExerciciosFragment rotinaDeExerciciosFragment = new RotinaDeExerciciosFragment();
-			criaFragment(rotinaDeExerciciosFragment);
+			FragmentTelaRotinaDeExercicios rotinaDeExerciciosFragment = new FragmentTelaRotinaDeExercicios();
+			substituirFragment(rotinaDeExerciciosFragment);
 			setTitle(textOpcoes[posicao]);
 			break;
 		case 3:
-			AvaliacaoFisicaFragment avaliaFisicaFragment = new AvaliacaoFisicaFragment();
-			criaFragment(avaliaFisicaFragment);
+			FragmentTelaAvaliacaoFisica avaliaFisicaFragment = new FragmentTelaAvaliacaoFisica();
+			substituirFragment(avaliaFisicaFragment);
 			setTitle(textOpcoes[posicao]);
 			break;
 		default:
@@ -158,9 +162,21 @@ public class Home extends ActionBarActivity {
 	 * Este método ira criar os fragmentos de tela a serem exibidos no
 	 * content_frame do home.xml
 	 */
-	public void criaFragment(Fragment fragment) {
-		FragmentManager fragmentManager = getFragmentManager();
-		fragmentManager.beginTransaction()
-				.replace(R.id.content_frame, fragment).commit();
+	
+	
+	// Adicionar estaticamente um novo fragmento de tela
+	public void adicionaFragment(Fragment fragment){
+		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+		transaction.add(R.id.content_frame, fragment);
+		transaction.addToBackStack(null);
+		transaction.commit();
+	}
+	
+	// substitui o fragmento de tela recebido por parâmetro
+	public void substituirFragment(Fragment fragment){
+		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+		transaction.replace(R.id.content_frame, fragment);
+		transaction.addToBackStack(null);
+		transaction.commit();
 	}
 }

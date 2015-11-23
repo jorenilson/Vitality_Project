@@ -16,25 +16,16 @@
         
         
     </LinearLayout>
-<Button 
-            android:id="@+id/btIr"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Ir para atividade"/>
 
-<TextView
-    android:id="@+id/textView4"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:text="Correr"
-    android:textAppearance="?android:attr/textAppearanceLarge"
-    android:gravity="center_horizontal" />
-
-<AnalogClock
-    android:id="@+id/analogClock1"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal" />
+    <Chronometer
+        android:id="@+id/cronometro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:format="%s"
+        android:gravity="center_horizontal"
+        android:textSize="80sp"
+        android:text="00:00" />
 
 <LinearLayout
     android:layout_width="match_parent"
@@ -43,22 +34,22 @@
     android:gravity="center_horizontal" >
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/bIniciarRotinaExercicios"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pause" />
+        android:text="Iniciar" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/bPausarRotinaExercicios"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Play" />
+        android:text="Pausar" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/bReiniciarRotinaExercicios"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Stop" />
+        android:text="Reiniciar" />
 
 </LinearLayout>
 

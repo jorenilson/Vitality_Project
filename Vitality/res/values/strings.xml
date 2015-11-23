@@ -12,16 +12,18 @@
         <item>Avaliaçao Física</item>
         <item>Sair</item>
     </string-array>
-    <string-array name="lista_exercicios">
+    <string-array name="listaDeExercicios">
         <item>Correr</item>
         <item>Caminhar</item>
         <item>Pedalar</item>
+        <item>Nadar</item>
+        <item>Futebol</item>
+        <item>Hipismo</item>
     </string-array>
     <string name="drawer_open">Abrir navegação Drawer</string>
     <string name="drawer_close">Fecha navegaçao drawer</string>
     <string name="action_websearch">Web search</string>
-    <string name="teste">teste</string>
-    <string-array name="lista_intensidade">
+    <string-array name="listaDeIntensidades">
         <item>Leve</item>
         <item>Mediana</item>
         <item>Intensa</item>

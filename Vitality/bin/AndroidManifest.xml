@@ -23,8 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.ciesa.tcc.vitality.view.Cadastro" />
-        <activity android:name="com.ciesa.tcc.vitality.view.Home" >
-        </activity>
+        <activity android:name="com.ciesa.tcc.vitality.view.Home" />
     </application>
 
 </manifest>

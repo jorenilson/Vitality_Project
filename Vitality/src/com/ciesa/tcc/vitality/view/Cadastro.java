@@ -41,7 +41,7 @@ public class Cadastro extends Activity {
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.novo);
+		setContentView(R.layout.layoutcadastro);
 
 		usuarioController = usuarioController.getInstance(this);
 

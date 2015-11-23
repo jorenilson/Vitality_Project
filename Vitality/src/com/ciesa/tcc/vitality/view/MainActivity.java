@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		setContentView(R.layout.telaprincipal);
 
 		context = this;
 		usuarioController = usuarioController.getInstance(context);
@@ -124,7 +124,7 @@ public class MainActivity extends Activity {
 	 * Este méetodo irá carregar a tela Home, caso o login seja validade com
 	 * sucesso.
 	 */
-	public void exibirTelaHome(View view) { 
+	public void exibirTelaHome(View view) {
 		Intent intent = new Intent(this, Home.class);
 		startActivity(intent);
 	}
