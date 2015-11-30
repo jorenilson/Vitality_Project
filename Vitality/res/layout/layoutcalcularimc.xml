@@ -15,20 +15,19 @@
         android:textSize="16dp" />
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/edAltura"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Altura"
-         />
+        android:hint="Altura" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/edPeso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:ems="10"
-        android:hint="Peso"
-        android:layout_marginTop="12dp" />
+        android:hint="Peso" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,24 +36,30 @@
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="Sexo:"
             android:textSize="17dp"
-            android:textStyle="bold"
-             />
+            android:textStyle="bold" />
 
-        <RadioButton
-            android:id="@+id/radioButton1"
-            android:layout_width="wrap_content"
+        <RadioGroup
+            android:id="@+id/rgSexo"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Masculino" />
+            android:orientation="horizontal" >
 
-        <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Feminino" />
+            <RadioButton
+                android:id="@+id/rbMasculino"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Masculino" />
 
+            <RadioButton
+                android:id="@+id/rbFeminino"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Feminino" />
+        </RadioGroup>
     </LinearLayout>
 
     <LinearLayout
@@ -63,18 +68,18 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/bIniciarRotinaExercicios"
+            android:id="@+id/btCalcular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Calcular"
             android:textColor="@color/branco" />
+    </LinearLayout>
 
-        <Button
-            android:id="@+id/bPausarRotinaExercicios"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cancelar"
-            android:textColor="@color/branco" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.31"
+        android:orientation="vertical" >
 
     </LinearLayout>
 

@@ -34,7 +34,7 @@ public class FragmentTelaRotinaDeExercicios extends Fragment {
 
 		spListaDeAtividades = (Spinner) view
 				.findViewById(R.id.spListaExercicios);
-		btIniciar = (Button) view.findViewById(R.id.bIniciarRotinaExercicios);
+		btIniciar = (Button) view.findViewById(R.id.btCalcular);
 		btPausar = (Button) view.findViewById(R.id.bPausarRotinaExercicios);
 		btReiniciar = (Button) view
 				.findViewById(R.id.bReiniciarRotinaExercicios);
