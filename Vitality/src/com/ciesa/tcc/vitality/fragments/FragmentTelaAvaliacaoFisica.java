@@ -131,7 +131,7 @@ public class FragmentTelaAvaliacaoFisica extends Fragment {
 		FragmentTransaction fragmentTransaction = fragmentManager
 				.beginTransaction();
 		fragmentTransaction.replace(R.id.content_frame,
-				fragmentTelaRotinaDeExercicios);
+				fragmentTelaRotinaDeExercicios,"Rotina de Exercícios");
 		fragmentTransaction.commit();
 	}
 }

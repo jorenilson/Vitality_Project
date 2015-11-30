@@ -158,7 +158,8 @@ public class FragmentTelaCalcularImc extends Fragment implements Calculadora {
 			@Override
 			public void onClick(DialogInterface arg0, int arg1) {
 				// TODO Auto-generated method stub
-				exibeMsg("Clicou sim...");
+				
+				irTelaAvaliacao();
 			}
 		});
 		alertDialog.setButton2("Não", new DialogInterface.OnClickListener() {
@@ -191,7 +192,16 @@ public class FragmentTelaCalcularImc extends Fragment implements Calculadora {
 		FragmentTelaPrincipal fragmentTelaPrincipal = new FragmentTelaPrincipal();
 		FragmentManager fragmentManager = getFragmentManager();
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-		fragmentTransaction.replace(R.id.content_frame, fragmentTelaPrincipal);
+		fragmentTransaction.replace(R.id.content_frame, fragmentTelaPrincipal, "Vitality");
+		fragmentTransaction.commit();
+		
+	}
+	
+	public void irTelaAvaliacao(){
+		FragmentTelaAvaliacaoFisica fragmentTelaAvaliacaoFisica = new FragmentTelaAvaliacaoFisica();
+		FragmentManager fragmentManager = getFragmentManager();
+		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+		fragmentTransaction.replace(R.id.content_frame, fragmentTelaAvaliacaoFisica,"Avaliação Física");
 		fragmentTransaction.commit();
 	}
 

@@ -168,7 +168,7 @@ public class Home extends ActionBarActivity {
 	public void adicionaFragment(Fragment fragment){
 		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 		transaction.add(R.id.content_frame, fragment);
-		transaction.addToBackStack(null);
+		//transaction.addToBackStack(null);
 		transaction.commit();
 	}
 	
@@ -176,7 +176,7 @@ public class Home extends ActionBarActivity {
 	public void substituirFragment(Fragment fragment){
 		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 		transaction.replace(R.id.content_frame, fragment);
-		transaction.addToBackStack(null);
+		//transaction.addToBackStack(null);
 		transaction.commit();
 	}
 }
