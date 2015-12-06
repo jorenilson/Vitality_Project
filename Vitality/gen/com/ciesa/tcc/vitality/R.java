@@ -1121,8 +1121,8 @@ containing a value of this type.
         public static final int bReiniciarRotinaExercicios=0x7f090064;
         public static final int beginning=0x7f090016;
         public static final int btAvaliacaoConfirmar=0x7f090052;
+        public static final int btCadastrar=0x7f090058;
         public static final int btCalcular=0x7f090060;
-        public static final int btConfirmar=0x7f090058;
         public static final int btEntrar=0x7f09006f;
         public static final int checkbox=0x7f09002d;
         public static final int collapseActionView=0x7f090010;

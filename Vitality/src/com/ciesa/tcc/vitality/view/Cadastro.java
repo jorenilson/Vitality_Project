@@ -3,14 +3,16 @@ package com.ciesa.tcc.vitality.view;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.ciesa.tcc.vitality.R;
 import com.ciesa.tcc.vitality.controller.UsuarioController;
@@ -24,9 +26,13 @@ public class Cadastro extends Activity {
 	private EditText edEmail;
 	private EditText edSenha;
 	private EditText edIdade;
+	private Button btCadastrar;
 	private Context context;
 	private UsuarioController usuarioController;
 	private AlertDialog.Builder alerta;
+	private View view;
+	private Usuario usuario;
+	private String varNome, varUsuario, varEmail, varIdade, varSenha;
 
 	// getters e setters
 	// ...
@@ -39,7 +45,7 @@ public class Cadastro extends Activity {
 		// habilito o botão boltar
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
-		
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layoutcadastro);
 
@@ -50,6 +56,23 @@ public class Cadastro extends Activity {
 		edEmail = (EditText) findViewById(R.id.edtEmail);
 		edIdade = (EditText) findViewById(R.id.edtIdade);
 		edSenha = (EditText) findViewById(R.id.edtSenha);
+		btCadastrar = (Button) findViewById(R.id.btCadastrar);
+		
+		varNome =edNome.getText().toString();
+		varUsuario=edUsuario.getText().toString();
+		varEmail = edEmail.getText().toString();
+		varIdade=edIdade.getText().toString();
+		varSenha =edSenha.getText().toString();
+		
+
+		btCadastrar.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				inserirCampos(v);
+			}
+		});
 	}
 
 	/*
@@ -65,24 +88,6 @@ public class Cadastro extends Activity {
 		alerta.create().show();
 	}
 
-	/*
-	 * Exibe na tela uma caixa de diálogo exibindo uma confirmação de que o
-	 * cadastro foi realizado com sucesso.
-	 */
-	public void exibirDialogoConfirmacaoCadastro(View view) {
-		alerta = new AlertDialog.Builder(context);
-		alerta.setTitle("Seja bem vindo!");
-		alerta.setMessage("Seu cadastro foi realizado com sucesso.");
-		alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
-				exibirTelaLogin();
-			}
-		});
-		alerta.create().show();
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -107,38 +112,59 @@ public class Cadastro extends Activity {
 	 * nulo. Pois somente assim o aplicativo poderá saber se o evento se trata
 	 * de uma edição ou uma inclusão.
 	 */
-	public void inserirCampos(View view) throws Exception {
-		try {
 
-			Usuario usuario = new Usuario();
-			boolean usuarioExiste;
-			String varNome = edNome.getText().toString();
-			String varUsuario = edUsuario.getText().toString();
-			String varIdade = edIdade.getText().toString();
-			String varEmail = edEmail.getText().toString();
-			String varSenha = edSenha.getText().toString();
+	public void inserirCampos(View v) {
 
-			usuario.setNome(varNome);
-			usuario.setUsuario(varUsuario);
-			usuario.setIdade(varIdade);
-			usuario.setEmail(varEmail);
-			usuario.setSenha(varSenha);
-			usuarioExiste = usuarioController.consultaUsuario(usuario.getUsuario());
+		usuario = new Usuario();
+		boolean usuarioExiste = false;
 
-			if (varNome.isEmpty() || varUsuario.isEmpty() || varIdade.isEmpty() || varEmail.isEmpty() || varSenha.isEmpty()){
-				exibeDialogo("Opa!", "O preenchimento dos campos é obrigatorio; Dado(s) inválido(s).");
-			}else if (usuarioExiste) {
-				exibeDialogo(
-						"Quase lá...",
-						"O cadastro não pôde ser realizado. Usuário informado já consta no banco de dados.");
-			} else {
-				usuarioController.inserir(usuario);
-				exibirDialogoConfirmacaoCadastro(view);
+		usuario.setNome(edNome.getText().toString());
+		usuario.setUsuario(edUsuario.getText().toString());
+		usuario.setIdade(edIdade.getText().toString());
+		usuario.setEmail(edEmail.getText().toString());
+		usuario.setSenha(edSenha.getText().toString());
+		
+
+		if (edNome.getText().toString().isEmpty()){
+			edNome.requestFocus();
+			edNome.setError("Nome inválido.");
+		}else if(edUsuario.getText().toString().isEmpty()){
+			edUsuario.requestFocus();
+			edUsuario.setError("Usuário inválido.");
+		}else if(edEmail.getText().toString().isEmpty()){
+			edEmail.requestFocus();
+			edEmail.setError("Email inválido.");
+		}else if(edIdade.getText().toString().isEmpty()){
+			edIdade.requestFocus();
+			edIdade.setError("Idade inválida.");
+		}else if(edSenha.getText().toString().isEmpty()){
+			edSenha.requestFocus();
+			edSenha.setError("Senha inválida.");
+		}else{
+			if (usuarioExiste = usuarioController.consultaUsuario(usuario.getUsuario())){
+				edUsuario.requestFocus();
+				edUsuario.setError("Usuário duplicado.");
+			}else{
+				try {
+					usuarioController.inserir(usuario);
+					Toast.makeText(v.getContext(), "Parabéns! Cadastro realizado com sucesso.", Toast.LENGTH_LONG).show();
+					exibirTelaLogin();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			// TODO: handle exception
 		}
+
+		/*
+		 * if (varNome.isEmpty() || varUsuario.isEmpty() || varIdade.isEmpty()
+		 * || varEmail.isEmpty() || varSenha.isEmpty()){ exibeDialogo("Opa!",
+		 * "O preenchimento dos campos é obrigatorio; Dado(s) inválido(s).");
+		 * }else if (usuarioExiste) { exibeDialogo( "Quase lá...",
+		 * "O cadastro não pôde ser realizado. Usuário informado já consta no banco de dados."
+		 * ); } else { usuarioController.inserir(usuario);
+		 * exibirDialogoConfirmacaoCadastro(view); }
+		 */
+
 	}
 
 	public void exibirTelaLogin() {

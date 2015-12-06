@@ -96,7 +96,7 @@ public class FragmentTelaCalcularImc extends Fragment implements Calculadora {
 	public void calcularImc(double peso, double altura, int sexo) {
 		double resultadoImc;
 		resultadoImc = (peso / altura) * altura;
-		resultadoImc = 30.0;
+		//resultadoImc = 30.0;
 		descricaoImc(resultadoImc); // Ontem a descriçao do IMC
 	}
 

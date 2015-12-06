@@ -34,7 +34,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:singleLine="true"
-        android:hint="E-mail" />
+        android:hint="E-mail"
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/edtIdade"
@@ -59,10 +60,9 @@
         android:layout_gravity="center_horizontal">
 
         <Button
-            android:id="@+id/btConfirmar"
+            android:id="@+id/btCadastrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="inserirCampos"
             android:text="Confirmar" />
 
     </LinearLayout>

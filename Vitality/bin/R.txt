@@ -274,8 +274,8 @@ int id bPausarRotinaExercicios 0x7f090063
 int id bReiniciarRotinaExercicios 0x7f090064
 int id beginning 0x7f090016
 int id btAvaliacaoConfirmar 0x7f090052
+int id btCadastrar 0x7f090058
 int id btCalcular 0x7f090060
-int id btConfirmar 0x7f090058
 int id btEntrar 0x7f09006f
 int id checkbox 0x7f09002d
 int id collapseActionView 0x7f090010

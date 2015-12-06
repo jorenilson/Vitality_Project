@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Altura" />
+        android:hint="Altura"/>
 
     <EditText
         android:id="@+id/edPeso"
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:ems="10"
-        android:hint="Peso" />
+        android:hint="Peso"/>
 
     <LinearLayout
         android:layout_width="match_parent"
