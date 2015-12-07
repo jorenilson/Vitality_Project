@@ -56,9 +56,9 @@ public class FragmentTelaCalcularImc extends Fragment implements Calculadora {
 			double varAltura, varPeso;
 			int varSexo;
 
-			if (validarCampos() == true) {
+			if (validarCampos()) {
 				varPeso = Double.parseDouble(edtPeso.getText().toString());
-				varAltura = Double.parseDouble(edtPeso.getText().toString());
+				varAltura = Double.parseDouble(edtAltura.getText().toString());
 				if (rbMasculino.isChecked()) {
 					varSexo = 0; // homem
 				} else {
@@ -95,8 +95,7 @@ public class FragmentTelaCalcularImc extends Fragment implements Calculadora {
 	@Override
 	public void calcularImc(double peso, double altura, int sexo) {
 		double resultadoImc;
-		resultadoImc = (peso / altura) * altura;
-		//resultadoImc = 30.0;
+		resultadoImc = (peso/(altura*altura));
 		descricaoImc(resultadoImc); // Ontem a descriçao do IMC
 	}
 

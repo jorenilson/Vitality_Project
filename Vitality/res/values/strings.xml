@@ -13,6 +13,7 @@
         <item>Sair</item>
     </string-array>
     <string-array name="listaDeExercicios">
+        <item>""</item>
         <item>Correr</item>
         <item>Caminhar</item>
         <item>Pedalar</item>
